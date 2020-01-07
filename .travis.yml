@@ -8,8 +8,6 @@ cache:
   directories:
     - node_modules
 
-before_script:
-- chmod +x ./deploy.sh
-
-script:
-  - bash ./deploy.sh
+deploy:
+  provider: script
+  script: "./deploy.sh"

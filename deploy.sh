@@ -28,17 +28,6 @@ git config user.email "marcoseduardoss@gmail.com"
 git add .
 git commit -m "Deploy to GitHub Pages"
 
-
-
-# Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
-ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
-ENCRYPTED_IV_VAR="encrypted_${ENCRYPTION_LABEL}_iv"
-ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
-ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
-openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in deploy_key.enc -out deploy_key -d
-chmod 600 deploy_key
-eval `ssh-agent -s`
-ssh-add deploy_key
 # Forçando o push do master para a branch gh-pages (Toda história anterior da branch
 # gh-pages será perdido, pois vamos substituí-lo.)  Redirecionamos qualquer saída para
 # /dev/null para ocultar quaisquer dados de credenciais sensíveis que de outra forma possam ser expostos.
