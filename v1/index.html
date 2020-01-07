@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+	<title>Marcos Eduardo - Software Engineer - Resume/CV/Bootstrap 4</title>
+	
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+	<link rel="shortcut icon" href="favicon.ico"> 
+	
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet">
+	
+	<!-- FontAwesome JS-->
+	<script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
+	
+	<!-- Theme CSS -->  
+	<link id="theme-style" rel="stylesheet" href="assets/css/devresume.css">
+
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		
+
+</head> 
+
+<body>
+<div id="app">
+	<!-- DEMO ONLY --> 
+	<div class="demo-banner px-2 py-3 text-white text-center font-weight-bold bg-primary">
+	<br class="d-lg-none"><a class="btn demo-btn-on-bg text-white font-weight-bold ml-2 mt-2 mt-lg-0" target="_blank" href="https://drive.google.com/file/d/1MeGwJZAUprJUi3oMNx68TZlRZsxr_8h3/view?usp=sharing" target="_blank"><i class="fas fa-external-link-alt mr-2"></i>Download PDF</a>
+	</div>
+	
+	<div class="main-wrapper">
+		<div class="container px-3 px-lg-5">
+			<article class="resume-wrapper mx-auto theme-bg-light p-5 mb-5 my-5 shadow-lg">
+				
+				<div class="resume-header">
+					<div class="row align-items-center">
+						<div class="resume-title col-12 col-md-6 col-lg-8 col-xl-9">
+							<h2 class="resume-name mb-0 text-uppercase">{{identificacao.nome}}</h2>
+							<div class="resume-tagline mb-3 mb-md-0">{{identificacao.profisssao}}</div>
+						</div><!--//resume-title-->
+						<div class="resume-contact col-12 col-md-6 col-lg-4 col-xl-3">
+							<ul class="list-unstyled mb-0">
+								<li class="mb-2"><i class="fas fa-phone-square fa-fw fa-lg mr-2 "></i><a class="resume-link" :href="'tel:'+identificacao.telefone">{{identificacao.telefone}}</a></li>
+								<li class="mb-2"><i class="fas fa-envelope-square fa-fw fa-lg mr-2"></i><a class="resume-link" :href="'mailto:'+identificacao.email">{{identificacao.email}}</a></li>
+								<li class="mb-2"><i class="fas fa-globe fa-fw fa-lg mr-2"></i><a class="resume-link" target="_blank" :href="'http://'+identificacao.linkdin">{{identificacao.linkdin}}</a></li>
+								<li class="mb-0"><i class="fas fa-map-marker-alt fa-fw fa-lg mr-2"></i>{{identificacao.endereco}}</li>
+							</ul>
+						</div><!--//resume-contact-->
+					</div><!--//row-->
+					
+				</div><!--//resume-header-->
+				<hr>
+				<div class="resume-intro py-3">
+					<div class="media flex-column flex-md-row align-items-center">
+						<img class="resume-profile-image mb-3 mb-md-0 mr-md-5 ml-md-0 rounded mx-auto" 
+						src="https://media.licdn.com/dms/image/C4D03AQFlphAxI4YWdQ/profile-displayphoto-shrink_200_200/0?e=1582761600&v=beta&t=pg4GiTsTzXpXpRFwE7fSmf--OPVPsCWspT4EKBTaYNg" alt="image">
+						<div class="media-body text-left">
+							<p class="mb-0">
+							
+							{{resumo}}
+
+							</p>
+						</div><!--//media-body-->
+					</div>
+				</div><!--//resume-intro-->
+				<hr>
+				<div class="resume-body">
+					<div class="row">
+						<div class="resume-main col-12 col-lg-8 col-xl-9 pr-0 pr-lg-5">
+							<section class="work-section py-3">
+								<h3 class="text-uppercase resume-section-heading mb-4">objective</h3>
+								<div class="item mb-3">								
+									<div class="item-content">
+										<p>
+											{{objetivo}}
+										</p>										
+									</div>
+								</div><!--//item-->
+								<h3 class="text-uppercase resume-section-heading mb-4">Work Experiences</h3>
+								
+								<div class="item mb-3" v-for="experiencia in experiencias"> 
+									<div class="item-heading row align-items-center mb-2">
+										<h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">{{experiencia.cargo}}</h4>
+										<div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">{{experiencia.anof - experiencia.anoi}} years  | {{experiencia.anoi}} - {{experiencia.anof}}</div>
+										
+									</div>
+									<div class="item-content">
+										<p v-html="experiencia.descricao"></p>
+											
+										</p>
+										<ul class="resume-list">
+											<li  v-for="topico in experiencia.topicos">
+												<span v-html="topico">{{topico}} </span></li>											
+										</ul>
+									</div>
+								</div><!--//item-->
+
+							
+								
+								
+							</section><!--//work-section-->
+
+							
+							<section class="project-section py-3">
+								<h3 class="text-uppercase resume-section-heading mb-4">Projects</h3>
+								<div class="item mb-3" v-for="projeto in projetos">
+									<div class="item-heading row align-items-center mb-2">
+										<h4 class="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">{{projeto.nome}}</h4>
+										<div class="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">Open Source</div>
+										
+									</div>
+									<div class="item-content">
+										<p>
+											{{projeto.detalhes}}
+										</p>
+										
+										
+									</div>
+								</div><!--//item-->
+								
+							</section><!--//project-section-->	
+						</div><!--//resume-main-->
+						<aside class="resume-aside col-12 col-lg-4 col-xl-3 px-lg-4 pb-lg-4">
+							<section class="skills-section py-3">
+								<h3 class="text-uppercase resume-section-heading mb-4">Skills</h3>
+								<div class="item">
+									<h4 class="item-title">Technical</h4>
+									<ul class="list-unstyled resume-skills-list">
+											<li class="mb-2" v-for="habilidade in habilidades.tecnicas">{{habilidade}}</li>
+										</ul>
+									</div><!--//item-->
+									<div class="item">
+										<h4 class="item-title">Professional</h4>
+										<ul class="list-unstyled resume-skills-list">
+												<li class="mb-2" v-for="habilidade in habilidades.profissionais">{{habilidade}}</li>
+										</div><!--//item-->
+									</section><!--//skills-section-->
+									<section class="education-section py-3">
+										<h3 class="text-uppercase resume-section-heading mb-4">Education</h3>
+										<ul class="list-unstyled resume-education-list">												
+											<li class="mb-3" v-for="curso in educacao">
+												<div class="resume-degree font-weight-bold">{{curso.curso}}</div>
+												<div class="resume-degree-org text-muted">{{curso.local}}</div>
+												<div class="resume-degree-time text-muted">{{curso.anoi}} - {{curso.anof}}</div>
+											</li>											
+										</ul>
+									</section><!--//education-section-->
+									<section class="education-section py-3">
+										<h3 class="text-uppercase resume-section-heading mb-4">Awards</h3>
+										<ul class="list-unstyled resume-awards-list">
+											<li class="mb-3" v-for="premio in premios">
+												<div class="font-weight-bold" :title="premio.descricao">{{premio.nome}}</div>
+												<div class="text-muted" 	  :title="premio.descricao">{{premio.local}} ({{premio.ano}})</div>
+											</li>											
+										</ul>
+									</section><!--//education-section-->
+									<section class="skills-section py-3">
+										<h3 class="text-uppercase resume-section-heading mb-4">Languages</h3>
+										<ul class="list-unstyled resume-lang-list">
+											<li class="mb-2" v-for="idioma in idiomas">{{idioma.nome}} <span class="text-muted">({{idioma.nivel}})</span></li>
+											
+										</ul>
+									</section><!--//certificates-section-->
+									<section class="skills-section py-3">
+										<h3 class="text-uppercase resume-section-heading mb-4">Interests</h3>
+										<ul class="list-unstyled resume-interests-list mb-0">
+											<li class="mb-2" v-for="interesse in interesses" >{{interesse}}</li>
+											
+										</ul>
+									</section><!--//certificates-section-->
+									
+								</aside><!--//resume-aside-->
+							</div><!--//row-->
+						</div><!--//resume-body-->
+						<hr>
+						<div class="resume-footer text-center">
+							<ul class="resume-social-list list-inline mx-auto mb-0 d-inline-block text-muted">
+								<li class="list-inline-item mb-lg-0 mr-3"><a class="resume-link" 	target="_blank"	:href="'http://'+identificacao.github"><i class="fab fa-github-square fa-2x mr-2" data-fa-transform="down-4"></i><span class="d-none d-lg-inline-block text-muted">{{identificacao.github}}</span></a></li>
+								<li class="list-inline-item mb-lg-0 mr-3"><a class="resume-link" 	target="_blank" :href="'http://'+identificacao.linkdin"><i class="fab fa-linkedin fa-2x mr-2" data-fa-transform="down-4"></i><span class="d-none d-lg-inline-block text-muted">{{identificacao.linkdin}}</span></a></li>
+								<li class="list-inline-item mb-lg-0 mr-lg-3"><a class="resume-link" target="_blank" :href="'http://'+identificacao.twitter"><i class="fab fa-twitter-square fa-2x mr-2" data-fa-transform="down-4"></i><span class="d-none d-lg-inline-block text-muted">{{identificacao.twitter}}</span></a></li>
+							</ul>
+						</div><!--//resume-footer-->
+					</article>
+					
+				</div><!--//container-->
+				
+				<footer class="footer text-center py-4">
+					<small class="copyright text-muted" v-html="site.rodape" > </small>
+				</footer>
+				
+			</div><!--//main-wrapper-->
+			
+</div>
+
+<script type="text/javascript">
+	new Vue({
+		el: "#app",
+		data: {
+                identificacao: {
+					nome: "Marcos Eduardo",
+					profisssao: "Engenheiro de Software", 
+					telefone:"+5585996145615",
+					email: "marcoseduardoss@gmail.com",
+					linkdin: "linkedin.com/in/marcoseduardoss",
+					twitter: "linkedin.com/in/marcoseduardoss",	
+					github:"github.com/marcoseduardoss",
+					twitter: "twitter.com/marcossed",				
+					endereco: "Fortaleza-CE - Brasil"
+				},
+				site: {
+					rodape: "<b>Site developed by Marcos Eduardo, using technologies of </b><br> <b>Back-End</b> (AWS / Gateway API / Microservices / Node.js / JWT / Rest / Json / MongoDB), <b>and</b> <br> <b>Front-End</b> (Vue / Javascript / Bootstrap)"
+				},
+				objetivo: "My current objective is to work as a remote developer for companies of other English speaking countries.",
+				resumo: "I am a Full Stack Developer from Brazil. I am an enthusiast in technologies, Software Engineering, Cloud Computing, DevOps, Project Management, and related areas. I have been working with architecture, specification, development, testing, maintenance, and software creation for more than 12 years, contributing with Brazilian companies and institutions, developing solutions and teaching computer subjects in undergraduate and postgraduate courses of public and private universities. I currently work as a Senior Systems Analyst in the Department of Information Technology (UECE) and teacher of the Licentiate in Computing (UECE) course. Graduated in Computer Science from the University Center of João Pessoa (2007), MBA in Project Management (2017) and Master in Applied Computing (2011) from the State University of Ceará.",
+				interesses: ["Climbing", "Snowboarding", "Photography", "Travelling"],
+				premios: [{nome: "Paraninfo", ano: 2013, local: "State University of Ceará", descricao: "Emeritus Professor of the Computing \nDegree Class at the State University of \nCeará - UECE (Graduation, August 15, 2013)"}],
+				idiomas: [{nome: "Portuguese", nivel:"Native"},{nome: "English", nivel:"Professional"}],
+				educacao: [
+					{curso: "Bacharelor in Computer Science", anoi: 2013, anof: 2014, local: "University Center of João Pessoa"},
+					{curso: "Specialization course in Project Manangement", anoi: 2013, anof: 2014, local: "State University of Ceará"},
+					{curso: "MSc in Computer", anoi: 2013, anof: 2014, local: "State University of Ceará"}
+				],				
+				experiencias: [
+					
+					{
+						cargo: "Software Engineer", 
+					 	descricao: "Definition of architecture, technical leadership, analysis, and development of Softwares for <a href=\"http://www.uece.br/proplan/detic\" target=\"_blank\">DETIC/UECE</a> (2012-2019), using agile technics with Scrum and the following Technologies or resources:  Design Pattern, Java/JavaScript/TypeScript/PHP/Perl/C, PL/SQL/ PGSQL,  PostgresSQL/SQLServe/Oracle/MySQL, Spring (Boot, MVC, Data, Security, Batch), Hibernate/JPA, JSF, RichFaces, PrimeFaces, BootFaces, Bootstrap, Web Service (Rest/Soap), Jersey, Angular/ AngularJS/React/PrimeNG/Bootstrap/ MaterialDesign, Ireport, SVN/ GIT, GITLAB/GITHUB/BITBUCKET, CI/CD/Gitlab/Jenkins Enterprise Architect for UML modeling, ITIL, MSproject, Trello, OTRS, and others Technologies or resources", 
+					 	anof: 2019, 
+					 	anoi: 2012, 
+					 	topicos: null
+					},{
+						cargo: "University Professor", 
+					 	descricao: "Professor in graduate and undergraduate courses, always seeking to teach classes in the areas of systems, projects and software engineering for educational institutions <a target=\"_blank\" href=\"https://www.wyden.com.br/unifanor\">Wyden/UniFanor</a> (2010-2012), <a target=\"_blank\" href=\"http://www.uece.br/computacaoead\">UECE</a> (2012-2019) and <a target=\"_blank\" href=\"http://unicatolicaquixada.edu.br/pos-graduacao/desenvolvimento-de-sistemas-para-internet/\">Unicat&oacute;lica</a> (2013, 2018).", 
+					 	anof: 2019, 
+					 	anoi: 2013, 
+					 	topicos: ["Subjects taught: Software Engineering, Project Management with Scrum, System Analysis, Algorithms, Human-Computer Interaction, Database, Web Development (Java), Data Structure (C), Search and Ordering Data (C), Programming Language I (Basic Java), Programming Language II (Advanced Java) and Logic Notions"]
+					},{
+						cargo: "Senior Software Developer", 
+					 	descricao: "Development, maintenance, and deployment of systems for <a href=\"http://www.najasolucoes.com.br\" target=\"_blank\" rel=\"noopener\">Naja Solu&ccedil;&otilde;es</a> (2008) and <a href=\"http://www.uece.br/proplan/detic\" target=\"_blank\" rel=\"noopener\">UECE</a> (2008-2012), using agile technics with Scrum, JSF, Junit, JBoss Server, Spring, JPA, Hibenate, SQL Server, Eclipse, SVN, Eclipse, NetBeans, Advanced JavaScript, Ext-JS and other technologies", 
+					 	anof: 2012, 
+					 	anoi: 2008, 
+					 	topicos: null
+					},{
+						cargo: "Software Developer", 
+					 	descricao: "Development, maintenance, and deployment of systems for <a href=\"http://www.tre-pb.jus.br\" target=\"_blank\" rel=\"noopener\">TRE-PB</a> (2005-2008) using Java technologies, Oracle SGBD, Struts, XML, SWT, Servlet, JSP, Jasper Report, ireport, HTML, Postgres, Postges, BDdesign, Oracle, NetBeans, CVS, and Jude for UML modeling", 
+					 	anof: 2008, 
+					 	anoi: 2005, 
+					 	topicos: null
+					}
+					
+				],
+				habilidades: {
+					tecnicas: [
+						"JSF/Angular/React/Vue",
+						"Primefaces/Richfaces/Bootstrap",
+						"JavaScript/Java/Python/C/PHP",
+						"JEE/Node.js",
+						"PostgreSQL/Oracle/MySQL",
+						"Object-oriented design",
+						"Design and implement database structures",
+						"Lead and deliver complex software systems"],
+					profissionais: [
+						"Effective communication",
+						"Team player",
+						"Strong problem solver",
+						"Good time management",]
+				},
+				projetos : [{
+					nome: "SiGDP",
+					detalhes : "Projeto de desenvolvimento do sistema SiGDP - Sistema de Gestão de Diárias e Passagens (Julho de 2012 a fevereiro de 2013); Descrição: Projeto de implementação do novo fluxo de gestão de diárias/passagens envolvendo todo o processo de solicitação, aprovação e liberação de recursos; Local: UECE; Participação: identificação e gestão do envolvimento das partes interessadas, coleta de requisitos, planejamento de escopo, desenvolvimento de cronograma, gestão de riscos e codificação do sistema."
+				},{
+					nome: "Siduece",
+					detalhes : "Projeto de manutenção do sistema Siduece (Dezembro de 2014 a Junho de 2015); Descrição: Projeto de correção de funcionalidades e finalização para implantação final do Siduece e realização de implantação piloto de homologação do sistema; Local: UECE; Participação: identificação e gestão do envolvimento das partes interessadas, coleta de requisitos, planejamento de escopo, desenvolvimento de cronograma, mobilização da equipes testes e de desenvolvimento, gerenciamento e execução de atividades e gerenciamento de riscos e ações corretivas de modo a manter o projeto dentro dos limites estabelecidos."
+				},{
+					nome: "ProfessorOnline",
+					detalhes : "Projeto de desenvolvimento do sistema ProfessorOnline (Fevereiro a Agosto de 2013); Descrição: Sistema de Gestão Online de Cadernetas Eletrônicas no que trata o registro de notas, frequências, conteúdo programático e integração de sistemas; Local: UECE; Participação: identificação e gestão do envolvimento das partes interessadas, coleta de requisitos, planejamento de escopo, definição de arquitetura, desenvolvimento de cronograma, mobilização da equipe, gerenciamento e execução de atividades, bem como identificação riscos e ações corretivas de modo a manter o projeto dentro dos limites estabelecidos."
+				}]
+    	}
+	});
+</script>
+</body>
+</html> 
+
