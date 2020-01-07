@@ -8,5 +8,10 @@ cache:
   directories:
     - node_modules
 
+before_script:
+- npm install -g bower
+- bower install
+- chmod +x ./deploy.sh
+
 script:
   - bash ./deploy.sh
