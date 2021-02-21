@@ -12,7 +12,7 @@
         "start": "node ./app.js"
     },
     "dependencies": {
-        "express": "~4.5",
+        "express": "~4.17",
         "json-lint": "~0.1.0"
     }
 }
